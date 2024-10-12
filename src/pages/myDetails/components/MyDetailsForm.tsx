@@ -17,5 +17,14 @@ export const MyDetailsForm = () => {
     console.log(data);
   };
 
-  return <Form fields={fields} schema={myDetailsSchema} onSubmit={onSubmit} />;
+  return (
+    <Form fields={fields} schema={myDetailsSchema} onSubmit={onSubmit}>
+      <button
+        type="submit"
+        className="px-4 py-2 bg-[#639605] w-full text-white rounded"
+      >
+        Enviar
+      </button>
+    </Form>
+  );
 };

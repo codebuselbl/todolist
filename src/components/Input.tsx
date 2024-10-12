@@ -12,6 +12,7 @@ interface IInput<T> {
   name: Path<T>;
   errors: FieldErrors<T>;
   label: string;
+  isTextarea?: boolean;
 }
 
 interface CustomFieldError extends FieldError {
@@ -25,6 +26,7 @@ export const Input = <T,>({
   name,
   errors,
   label,
+  isTextarea,
 }: IInput<T>) => {
   const errorMessage = (errors[name] as CustomFieldError)
     ? (errors[name] as FieldError).message
@@ -39,15 +41,26 @@ export const Input = <T,>({
         {label}
       </label>
 
-      <input
-        id={id}
-        type={type}
-        {...register(name)}
-        className={`mt-1 block w-full p-2 border ${
-          errorMessage ? "border-red-500" : "border-gray-300"
-        }`}
-        placeholder={label}
-      />
+      {isTextarea ? (
+        <textarea
+          id={id}
+          {...register(name)}
+          className={`mt-1 block w-full p-2 border h-[156px] ${
+            errorMessage ? "border-red-500" : "border-gray-300"
+          }`}
+          placeholder={label}
+        />
+      ) : (
+        <input
+          id={id}
+          type={type}
+          {...register(name)}
+          className={`mt-1 block w-full p-2 border ${
+            errorMessage ? "border-red-500" : "border-gray-300"
+          }`}
+          placeholder={label}
+        />
+      )}
       {errorMessage && (
         <span className="text-red-500 text-sm">{errorMessage}</span>
       )}

@@ -13,17 +13,20 @@ export interface InputField<T extends FieldValues> {
   name: Path<T>;
   label: string;
   type: string;
+  isTextarea?: boolean;
   validation?: RegisterOptions;
 }
 interface FormProps<T extends FieldValues> {
   fields: InputField<T>[];
   schema: ZodSchema<T>;
   onSubmit: SubmitHandler<T>;
+  children?: React.ReactNode;
 }
 export const Form = <T extends FieldValues>({
   fields,
   schema,
   onSubmit,
+  children,
 }: FormProps<T>) => {
   const {
     register,
@@ -44,16 +47,11 @@ export const Form = <T extends FieldValues>({
             name={field.name}
             errors={errors}
             label={field.label}
+            isTextarea={field.isTextarea}
           />
         </div>
       ))}
-
-      <button
-        type="submit"
-        className="px-4 py-2 bg-[#639605] w-full text-white rounded"
-      >
-        Enviar
-      </button>
+      {children}
     </form>
   );
 };
