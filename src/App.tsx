@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Sidebar />
-      <div className="flex">
+      <div className="flex bg-[#f4f4f4] h-screen">
         <Routes>
           <Route path="/" element={<MyDetails />} />
           <Route path="/mis-datos" element={<MyDetails />} />
